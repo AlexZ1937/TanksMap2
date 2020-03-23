@@ -79,7 +79,7 @@ namespace MapTank
             bool maperror = false;
             foreach (var item in listwalls)
             {
-                if ((tank1.pos.Y + tank1.Height >= item.first.Y && tank1.pos.Y <= item.second.Y) || (item.first.Y == item.second.Y && item.first.Y + wallwidth > tank1.pos.Y && item.first.Y - 5 < tank1.pos.Y + tank1.Width))
+                if ((tank1.pos.Y + tank1.Height >= item.first.Y && tank1.pos.Y <= item.second.Y) || (item.first.Y == item.second.Y && item.first.Y + wallwidth > tank1.pos.Y && item.first.Y - wallwidth < tank1.pos.Y + tank1.Width))
                 {
                     if (tank1.pos.X + tank1.Width <= item.first.X && (tank1.pos.X + tank1.Width + pacStep) >= item.first.X)
                     {
@@ -95,148 +95,80 @@ namespace MapTank
 
         }
 
-        //private void UpMove()
-        //{
-        //    bool maperror = false;
-        //    foreach (var item in listwalls)
-        //    {
-        //        if ((tank1.pos.X + tank1.Width >= item.first.X && tank1.pos.X <= item.second.X))
-        //        {
-        //            if ((tank1.pos.Y >= item.first.Y && (tank1.pos.Y - pacStep) <= item.first.Y))
-        //            {
-        //                maperror = true;
-        //                break;
-        //            }
-        //        }
+        private bool UpMove()
+        {
+            bool maperror = false;
+            foreach (var item in listwalls)
+            {
+                if ((tank1.pos.X + tank1.Width >= item.first.X && tank1.pos.X <= item.second.X))
+                {
+                    if ((tank1.pos.Y >= item.first.Y && (tank1.pos.Y - pacStep) <= item.first.Y))
+                    {
+                        maperror = true;
+                        break;
+                    }
+                }
 
-        //        if ((item.first.X == item.second.X && item.second.X + wallwidth > item.first.X && item.second.X - 5 < item.first.X + item.first.X))
-        //        {
-        //            if ((Ymy >= item.second.Y && (Ymy - pacStep) <= item.second.Y))
-        //            {
-        //                maperror = true;
-        //                break;
-        //            }
-        //        }
+                if ((item.first.X == item.second.X && item.second.X + wallwidth > item.first.X && item.second.X - wallwidth < item.first.X + item.first.X))
+                {
+                    if ((tank1.pos.Y >= item.second.Y && (tank1.pos.Y - pacStep) <= item.second.Y))
+                    {
+                        maperror = true;
+                        break;
+                    }
+                }
 
-        //    }
-        //    int k = 0;
-        //    foreach (var item in coins)
-        //    {
-
-        //        if (item.pos.X > Xmy && item.pos.X < Xmy + pacSize)
-        //        {
-        //            if (item.pos.Y > Ymy && item.pos.Y < Ymy + pacSize)
-        //            {
-        //                coins.RemoveAt(k);
-        //                tempArifmetic += 5;
-        //                break;
-        //            }
-        //        }
-        //        k++;
-
-        //    }
-        //    if (maperror == false)
-        //    {
-        //        e.Graphics.FillPie(Brushes.White, Xmy, Ymy, pacSize, pacSize, 0, 360);
-
-        //        Ymy -= pacStep;
-        //        e.Graphics.FillPie(Brushes.GreenYellow, Xmy, Ymy, pacSize, pacSize, 310, 290);
-        //        MapPnt(sender, e);
-        //    }
-
-        //}
-
-        //private void DownMove(object sender, PaintEventArgs e)
-        //{
-        //    bool maperror = false;
-        //    foreach (var item in maps)
-        //    {
-        //        if ((Xmy + pacSize >= item.first.X && Xmy <= item.second.X))
-        //        {
-        //            if ((Ymy + pacSize <= item.first.Y && (Ymy + pacSize + pacStep) >= item.first.Y))
-        //            {
-        //                maperror = true;
-        //                break;
-        //            }
-        //        }
-
-        //        if ((item.first.X == item.second.X && item.first.X - 5 > Xmy && item.first.X + 5 < Xmy + pacSize))
-        //        {
-        //            if ((Ymy + pacSize <= item.first.Y && (Ymy + pacSize + pacStep) >= item.first.Y))
-        //            {
-        //                maperror = true;
-        //                break;
-        //            }
-        //        }
-
-        //    }
-        //    int k = 0;
-        //    foreach (var item in coins)
-        //    {
-
-        //        if (item.pos.X > Xmy && item.pos.X < Xmy + pacSize)
-        //        {
-        //            if (item.pos.Y > Ymy && item.pos.Y < Ymy + pacSize)
-        //            {
-        //                coins.RemoveAt(k);
-        //                tempArifmetic += 5;
-        //                break;
-        //            }
-        //        }
-        //        k++;
-
-        //    }
-        //    if (maperror == false)
-        //    {
-        //        e.Graphics.FillPie(Brushes.White, Xmy, Ymy, pacSize, pacSize, 0, 360);
-
-        //        Ymy += pacStep;
-        //        e.Graphics.FillPie(Brushes.GreenYellow, Xmy, Ymy, pacSize, pacSize, 130, 280);
-        //        MapPnt(sender, e);
-        //    }
-        //}
+            }
+            return maperror;
 
 
-        //private void LeftMove(object sender, PaintEventArgs e)
-        //{
-        //    bool maperror = false;
-        //    foreach (var item in maps)
-        //    {
-        //        if ((Ymy + pacSize >= item.first.Y && Ymy <= item.second.Y) || (item.first.Y == item.second.Y && item.first.Y + 5 > Ymy && item.first.Y - 5 < Ymy + pacSize))
-        //        {
-        //            if (Xmy >= item.second.X && (Xmy - pacStep) <= item.second.X)
-        //            {
-        //                maperror = true;
-        //                break;
-        //            }
-        //        }
+        }
 
-        //    }
-        //    int k = 0;
-        //    foreach (var item in coins)
-        //    {
+        private bool DownMove(object sender, PaintEventArgs e)
+        {
+            bool maperror = false;
+            foreach (var item in listwalls)
+            {
+                if ((tank1.pos.X + tank1.Width >= item.first.X && tank1.pos.X <= item.second.X))
+                {
+                    if ((tank1.pos.Y + tank1.Height <= item.first.Y && (tank1.pos.Y + tank1.Width + pacStep) >= item.first.Y))
+                    {
+                        maperror = true;
+                        break;
+                    }
+                }
 
-        //        if (item.pos.X > Xmy && item.pos.X < Xmy + pacSize)
-        //        {
-        //            if (item.pos.Y > Ymy && item.pos.Y < Ymy + pacSize)
-        //            {
-        //                coins.RemoveAt(k);
-        //                tempArifmetic += 5;
-        //                break;
-        //            }
-        //        }
-        //        k++;
+                if ((item.first.X == item.second.X && item.first.X - wallwidth > tank1.pos.X && item.first.X + wallwidth < tank1.pos.X + tank1.Width))
+                {
+                    if ((tank1.pos.Y + tank1.Height <= item.first.Y && (tank1.pos.Y + tank1.Height + pacStep) >= item.first.Y))
+                    {
+                        maperror = true;
+                        break;
+                    }
+                }
 
-        //    }
-        //    if (maperror == false)
-        //    {
-        //        e.Graphics.FillPie(Brushes.White, Xmy, Ymy, pacSize, pacSize, 0, 360);
+            }
+            return maperror;
+        }
 
-        //        Xmy -= pacStep;
-        //        e.Graphics.FillPie(Brushes.GreenYellow, Xmy, Ymy, pacSize, pacSize, 210, 300);
-        //        MapPnt(sender, e);
-        //    }
-        //}
+
+        private bool LeftMove(object sender, PaintEventArgs e)
+        {
+            bool maperror = false;
+            foreach (var item in listwalls)
+            {
+                if ((tank1.pos.Y + tank1.Height >= item.first.Y && tank1.pos.Y <= item.second.Y) || (item.first.Y == item.second.Y && item.first.Y + 5 > tank1.pos.Y && item.first.Y - 5 < tank1.pos.Y + tank1.Height))
+                {
+                    if (tank1.pos.X >= item.second.X && (tank1.pos.X - pacStep) <= item.second.X)
+                    {
+                        maperror = true;
+                        break;
+                    }
+                }
+
+            }
+            return maperror;
+        }
 
 
 
